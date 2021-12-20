@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Formato BCP</title>
+        <title><?php echo $titulo ?></title>
 
         <!-- bootstra 4 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -25,34 +25,15 @@
             </button>
           
             <div class="collapse navbar-collapse align-content-end" id="navbarSupportedContent">
-                <a class="navbar-link" href="#">BCP Formatter</a>
+                <a class="navbar-item" href="index.php">BCP Formatter</a>
             </div>
 
         </nav>
 
         <div class="container p-3">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title w-100 text-center">
-                                Transferencias diarias
-                            </h4>
-                            <form id="transf">
-                                <div class="form-group">
-                                    <textarea class="form-control"  id="excl" cols="30" rows="10" placeholder="operacines a excluir"></textarea>
-                            
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="operaciones" type="file" name="fileupload" />
-                                </div>
-                                
-                                <button id="format"  type="submit" class="btn btn-dark btn-block text-center">Corregir</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                include $pagina;
+            ?>
         </div>
 
 

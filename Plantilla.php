@@ -25,9 +25,18 @@
             </button>
           
             <div class="collapse navbar-collapse align-content-end" id="navbarSupportedContent">
-                <a class="navbar-item" href="index.php">BCP Formatter</a>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.php">Formato BCP<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ClientesWU.php">Clientes WU</a>
+                    </li>              
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
             </div>
-
         </nav>
 
         <div class="container p-3">

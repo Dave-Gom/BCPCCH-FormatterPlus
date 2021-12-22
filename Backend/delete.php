@@ -5,4 +5,5 @@
         echo "no se pudo eliminar el archivo ".$name;
     else    
         echo "exito";
+        
 ?>

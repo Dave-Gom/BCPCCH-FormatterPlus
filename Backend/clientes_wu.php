@@ -27,6 +27,5 @@
             die(json_encode('{"exito":null, "error": "Fallo la insercion"}'));
         }
     }
-        
     echo json_encode('{"exito":null, "error": "El susuario ya esta registrado"}');
 ?>

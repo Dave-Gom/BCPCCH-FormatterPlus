@@ -99,4 +99,38 @@ $(document).ready( () => {
                 )
         });
     }
+
+    /* operaciones con Clientes internos */
+    if(document.getElementById('clientes')){
+        const objNCliente = document.getElementById('num_cliente');
+        const sucursal = document.getElementById('sucursal');
+        objNCliente.addEventListener("keyup", (e)=>{
+            if(objNCliente.value && sucursal.value != null){
+                let Ncliente = objNCliente.value;
+                let data = {cliente: Ncliente, suc: sucursal.value};
+                let info = JSON.stringify(data);
+                fetch('Backend/clientes_int.php', {method:'POST', 
+                    headers:{'Content-Type': 'application/json'},
+                    body: info
+                })
+                .then(
+                    (res)=>{
+                        return res.json();
+                    }
+                )
+                .then( 
+                    (respuesta)=>{
+                        // console.log(respuesta);
+                        let template = ''
+                        respuesta.forEach(cliente => {
+                            template += `<li>  ${cliente.name} </li>`
+                        });
+                        console.log(respuesta);
+                        document.getElementById("container").innerHTML = template;
+                    }
+                    
+                )
+            }
+        })
+    }
 });

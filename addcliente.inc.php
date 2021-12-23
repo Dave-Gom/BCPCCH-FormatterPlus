@@ -17,7 +17,7 @@
                                 
                                 <label for="cliente" class="w-100">
                                     Numero de Cliente:
-                                    <input required type="text" class="form-control" placeholder="Numero de cliente" id="cliente" autocomplete="off">
+                                    <input required type="text" class="form-control" placeholder="Numero de cliente" id="num_cliente" autocomplete="off">
                                 </label>
                                 <label for="docIdent" class="form-group w-100">
                                     Numero de Documento:
@@ -30,6 +30,12 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    
+                    <div class="card">
+                        <div class="card-body">
+                            <ul id="container">
+
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>

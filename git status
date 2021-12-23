@@ -1,0 +1,23 @@
+[33mcommit 30f334c060f21c90e9303242fdebc80969f4cfd5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: David Gómez <Administrador@01-INFO4-PC.cambioschaco.com.py>
+Date:   Thu Dec 23 10:58:14 2021 -0300
+
+    Aniadir clientes WU listo
+
+[33mcommit d2e35d00e7d3e545e8aaa08bb6c92bfcd6ff730b[m
+Author: David Gómez <Administrador@01-INFO4-PC.cambioschaco.com.py>
+Date:   Wed Dec 22 12:20:23 2021 -0300
+
+    sistema para anniadir clientes WU
+
+[33mcommit 2acd2d01e56bd7f3e07feb82001ff8e698d715e9[m
+Author: David Gómez <Administrador@01-INFO4-PC.cambioschaco.com.py>
+Date:   Mon Dec 20 13:24:52 2021 -0300
+
+    Nueva Construccion en base a php, Agregados: conexion a base de datos, plantilla.php y paginas y form para adgregar Clientes WU
+
+[33mcommit eab691ba1dc77898bb09b43adff8339008cb30c2[m
+Author: unknown <Administrador@01-INFO4-PC.cambioschaco.com.py>
+Date:   Mon Dec 20 10:25:20 2021 -0300
+
+    Primer Snapshot: Edicion de formato BCP Funcional

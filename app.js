@@ -82,8 +82,15 @@ $(document).ready( () => {
                     return res.json(); 
                 })
                 .then((data)=>{ 
-                    alert( data ); 
-                    window.location.href = 'http://localhost/VSHCP/formato_BCP/ClientesWU.php';
+                    // console.log(data);
+                    let respuesta = JSON.parse(data);
+                    if( respuesta.error == null){
+                        alert(respuesta.exito);
+                        window.location.href = 'http://localhost/VSHCP/formato_BCP/ClientesWU.php';
+                    } 
+                    else
+                        alert("NO se pudo completar la operacion: "+respuesta.error);
+                    
                 })
                 .catch(
                     (error)=>{

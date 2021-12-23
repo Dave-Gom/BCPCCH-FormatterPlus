@@ -9,16 +9,24 @@
             include 'Basededatos/conexion_pjc.php';
             break;
         default:
-            die(json_encode("Error: no se "));
+            die(json_encode('{"exito":null, "error": "No se pudo conectar a la sucursal"}'));
     }
 
     $num_cliente = $datos->CtdId;
     $tipo_doc = $datos->CtdTDoc;
     $doc_cliente = $datos->CtdDoc;
-    $query = "INSERT INTO clientesext(CtdId,CtdTDoc,CtdDoc) VALUES ('$num_cliente','$tipo_doc','$doc_cliente')";
+    $query = "SELECT CtdDoc FROM clientesext WHERE CtdId = '$num_cliente'";
     $result = mysqli_query($conection, $query);
-    if(!$result)
-        die(json_encode("No se pudo cargar"));
-    
-    echo json_encode("Cargado con exito");
+    if($result){
+        die (json_encode('{"exito":null, "error": "El susuario ya esta registrado"}'));
+    }
+    else{
+        $query = "INSERT INTO clientesext(CtdId,CtdTDoc,CtdDoc) VALUES ('$num_cliente','$tipo_doc','$doc_cliente')";
+        $result = mysqli_query($conection, $query);
+        if(!$result){    
+            die(json_encode('{"exito":null, "error": "Fallo la insercion"}'));
+        }
+    }
+        
+    echo json_encode('{"exito":null, "error": "El susuario ya esta registrado"}');
 ?>

@@ -1,6 +1,9 @@
 <?php
     $datos = file_get_contents('php://input');
     $datos = json_decode($datos);
+    $cliente = $datos->cliente;
+    $sucursal = $datos->suc;
+
     switch($datos->suc){
         case 1:
             include 'Basededatos/conexion.php';
@@ -11,25 +14,13 @@
         default:
             die(json_encode('{"exito":null, "error": "No se pudo conectar a la sucursal"}'));
     }
-    
-    $num_cliente = $datos->cliente;
-    $query = "SELECT * FROM clientes where CtdId like '$num_cliente%'";
+
+    $query = "UPDATE clientes SET CtdStS='HAB' where CtdId='$cliente'";
     $result = mysqli_query($conection, $query);
     if( !$result){
         die (json_encode( "{error:".mysqli_error($conection)));
     }
-
-    $json = array();
-    while( $row = mysqli_fetch_array($result)){
-        $json[] = array(
-            'idCliente'=> $row['CtdId'],
-            'name' => $row["CtdNomb"],
-            'status' => $row["CtdSts"],
-            "bloc" => $row['CtdCodInf2'],
-            "ci"=> $row['CtdTDoc']
-        );
+    else{
+        echo json_encode('{"exito": "Cargado con Exito", "error": "null"}');
     }
-
-    $jsonstring = json_encode($json);
-    echo ($jsonstring);
 ?>

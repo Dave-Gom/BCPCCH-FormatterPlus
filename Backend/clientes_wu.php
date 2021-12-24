@@ -17,15 +17,15 @@
     $doc_cliente = $datos->CtdDoc;
     $query = "SELECT CtdDoc FROM clientesext WHERE CtdId = '$num_cliente'";
     $result = mysqli_query($conection, $query);
-    if($result){
-        die (json_encode('{"exito":null, "error": "El susuario ya esta registrado"}'));
-    }
-    else{
+    if(!$result){
         $query = "INSERT INTO clientesext(CtdId,CtdTDoc,CtdDoc) VALUES ('$num_cliente','$tipo_doc','$doc_cliente')";
         $result = mysqli_query($conection, $query);
         if(!$result){    
             die(json_encode('{"exito":null, "error": "Fallo la insercion"}'));
         }
     }
-    echo json_encode('{"exito":null, "error": "El susuario ya esta registrado"}');
+    else{
+        die (json_encode('{"exito":null, "error": "El usuario ya esta registrado"}'));
+    }
+    echo json_encode('{"exito":Cargado con Exito, "error": "null"}');
 ?>

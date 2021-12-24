@@ -104,33 +104,106 @@ $(document).ready( () => {
     if(document.getElementById('clientes')){
         const objNCliente = document.getElementById('num_cliente');
         const sucursal = document.getElementById('sucursal');
+        const muestra_clientes = ()=>{
+            let Ncliente = objNCliente.value;
+            let data = {cliente: Ncliente, suc: sucursal.value};
+            let info = JSON.stringify(data);
+            fetch('Backend/clientes_int.php', {method:'POST', 
+                headers:{'Content-Type': 'application/json'},
+                body: info
+            })
+            .then(
+                (res)=>{
+                    return res.json();
+                }
+            )
+            .then( 
+                (respuesta)=>{
+                    // console.log(respuesta);
+                    let template = '';
+                    let bloc;
+                    let desbloc, habilitar, cDes, chab, habli, bloque;
+                    respuesta.forEach(cliente => {
+                        bloc = cliente.bloc == null ? 'Bloc': 'no';
+                        if( cliente.bloc == null){
+                            desbloc = "Desbloquado";
+                            cDes = 'success';
+                            bloque = "disabled";
+                        }
+                        else{
+                            desbloc = "Desbloquear";
+                            cDes = 'danger';
+                            bloque = '';
+                        }
+                        if(cliente.status == 'HAB'){
+                            habilitar = 'Habilitado';
+                            chab = 'success';
+                            habli = "Disabled";
+                        }
+                        else{
+                            habilitar = 'Habilitar';
+                            chab = 'danger';
+                            habli = '';
+                        }
+                        template += `
+                            <tr cliente='${cliente.idCliente}'>
+                                <td >${cliente.idCliente}</td>
+                                <td >${cliente.name}</td>
+                                <td>${cliente.ci}</td>
+                                <td>${cliente.status}</td>
+                                <td>${bloc}</td>
+                                <td>
+                                        <button class="m-1 hablilitar  btn btn-${chab}" ${habli}>${habilitar}</button>
+                                    
+                                        <button class="btn desbloquear btn-${cDes}" ${bloque}>${desbloc}</button>
+                                    
+                                </td>
+                            </tr>`;
+                    });
+                    //console.log(respuesta);
+                    document.getElementById("tabla_clientes").innerHTML = template;
+                }
+            )
+        }
         objNCliente.addEventListener("keyup", (e)=>{
             if(objNCliente.value && sucursal.value != null){
-                let Ncliente = objNCliente.value;
-                let data = {cliente: Ncliente, suc: sucursal.value};
-                let info = JSON.stringify(data);
-                fetch('Backend/clientes_int.php', {method:'POST', 
+                muestra_clientes();
+            }
+        })
+
+        if(document.getElementsByClassName("habilitar")){
+            $(document).on('click','.hablilitar', function(){
+                let element = $(this)[0].parentElement.parentElement;
+                let cliente =$(element).attr('cliente');
+                let sucursal = document.getElementById('sucursal').value;
+                let hablilitar = {cliente: cliente, suc: sucursal};
+                fetch('Backend/hablilitar.php', {method: "POST", 
                     headers:{'Content-Type': 'application/json'},
-                    body: info
+                    body: JSON.stringify(hablilitar)
                 })
                 .then(
-                    (res)=>{
+                    res =>{
                         return res.json();
                     }
                 )
-                .then( 
-                    (respuesta)=>{
+                .then(
+                    data =>{
+                        let respuesta = JSON.parse(data);
                         // console.log(respuesta);
-                        let template = ''
-                        respuesta.forEach(cliente => {
-                            template += `<li>  ${cliente.name} </li>`
-                        });
-                        console.log(respuesta);
-                        document.getElementById("container").innerHTML = template;
-                    }
-                    
+                        if( respuesta.error === 'null' ){
+                            alert(respuesta.exito);
+                            muestra_clientes();
+                        } 
+                        else
+                            alert("NO se pudo completar la operacion: "+respuesta.error);
+                        }
                 )
-            }
-        })
+                // .catch(
+                //     err =>{
+                //         console.error(err);
+                //     }
+                // )
+            })
+        }
     }
 });

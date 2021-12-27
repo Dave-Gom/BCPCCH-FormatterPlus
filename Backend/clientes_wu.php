@@ -15,17 +15,27 @@
     $num_cliente = $datos->CtdId;
     $tipo_doc = $datos->CtdTDoc;
     $doc_cliente = $datos->CtdDoc;
-    $query = "SELECT CtdDoc FROM clientesext WHERE CtdId = '$num_cliente'";
+    $query = "SELECT * FROM clientesext WHERE CtdId = '$num_cliente'";
     $result = mysqli_query($conection, $query);
-    if(!$result){
-        $query = "INSERT INTO clientesext(CtdId,CtdTDoc,CtdDoc) VALUES ('$num_cliente','$tipo_doc','$doc_cliente')";
-        $result = mysqli_query($conection, $query);
-        if(!$result){    
-            die(json_encode('{"exito":null, "error": "Fallo la insercion"}'));
+    $row = $result->fetch_assoc();
+    $query = "SELECT * FROM clientesext WHERE CtdDoc = '$doc_cliente'";
+    $result = mysqli_query($conection, $query);
+    $row2 = $result->fetch_assoc();
+    if($row === null){
+        if($row2 === null || $row2['CtdTDoc'] != $tipo_doc){
+            $query = "INSERT INTO clientesext(CtdId,CtdTDoc,CtdDoc) VALUES ('$num_cliente','$tipo_doc','$doc_cliente')";
+            $result = mysqli_query($conection, $query);
+            if(!$result){    
+                die(json_encode('{"exito":"null", "error": "Fallo la insercion"}'));
+            }
+        }
+        else{
+            die (json_encode('{"exito":"null", "error": "El usuario ya esta registrado, CI Ya existe"}'));
         }
     }
     else{
-        die (json_encode('{"exito":null, "error": "El usuario ya esta registrado"}'));
+        die (json_encode('{"exito":"null", "error": "El usuario ya esta registrado, numero de cliente Ya existe"}'));
     }
-    echo json_encode('{"exito":Cargado con Exito, "error": "null"}');
+
+    echo json_encode('{"exito":"Cargado con Exito", "error": "null"}');
 ?>

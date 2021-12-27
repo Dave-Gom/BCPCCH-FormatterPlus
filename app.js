@@ -84,7 +84,8 @@ $(document).ready( () => {
                 .then((data)=>{ 
                     // console.log(data);
                     let respuesta = JSON.parse(data);
-                    if( respuesta.error == null){
+                    //console.log(respuesta);
+                    if( respuesta.error == 'null'){
                         alert(respuesta.exito);
                         window.location.href = 'http://localhost/VSHCP/formato_BCP/ClientesWU.php';
                     } 
@@ -92,11 +93,11 @@ $(document).ready( () => {
                         alert("NO se pudo completar la operacion: "+respuesta.error);
                     
                 })
-                .catch(
-                    (error)=>{
-                        console.error(error);
-                    }
-                )
+                // .catch(
+                //     (error)=>{
+                //         console.error(error);
+                //     }
+                // )
         });
     }
 

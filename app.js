@@ -124,8 +124,8 @@ $(document).ready( () => {
                     let bloc;
                     let desbloc, habilitar, cDes, chab, habli, bloque;
                     respuesta.forEach(cliente => {
-                        bloc = cliente.bloc == null ? 'Bloc': 'no';
-                        if( cliente.bloc == null){
+                        bloc = cliente.bloc != '' ? 'Bloq': 'Desbloq';
+                        if( cliente.bloc == ""){
                             desbloc = "Desbloquado";
                             cDes = 'success';
                             bloque = "disabled";
@@ -150,13 +150,21 @@ $(document).ready( () => {
                                 <td >${cliente.idCliente}</td>
                                 <td >${cliente.name}</td>
                                 <td>${cliente.ci}</td>
-                                <td>${cliente.status}</td>
-                                <td>${bloc}</td>
                                 <td>
-                                        <button class="m-1 hablilitar  btn btn-${chab}" ${habli}>${habilitar}</button>
-                                    
-                                        <button class="btn desbloquear btn-${cDes}" ${bloque}>${desbloc}</button>
-                                    
+                                    <span class="badge badge-pill badge-${chab}">${cliente.status}</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill badge-${cDes}">${bloc}</span>
+                                </td>
+                                <td>
+                                    <div class="container">
+                                        <div class="row">
+                                            
+                                                <button class="m-1 btn col-sm-5 hablilitar   btn-${chab}" ${habli}>${habilitar}</button>
+                                                <button class=" m-1 btn col-sm-5 desbloquear btn-${cDes}" ${bloque}>${desbloc}</button>
+                                            
+                                        </div>
+                                    </div> 
                                 </td>
                             </tr>`;
                     });
@@ -173,10 +181,11 @@ $(document).ready( () => {
 
         if(document.getElementsByClassName("habilitar")){
             $(document).on('click','.hablilitar', function(){
-                let element = $(this)[0].parentElement.parentElement;
+                let element = $(this)[0].parentElement.parentElement.parentElement.parentElement;
                 let cliente =$(element).attr('cliente');
                 let sucursal = document.getElementById('sucursal').value;
                 let hablilitar = {cliente: cliente, suc: sucursal};
+                console.log(hablilitar);
                 fetch('Backend/hablilitar.php', {method: "POST", 
                     headers:{'Content-Type': 'application/json'},
                     body: JSON.stringify(hablilitar)
@@ -189,7 +198,7 @@ $(document).ready( () => {
                 .then(
                     data =>{
                         let respuesta = JSON.parse(data);
-                        // console.log(respuesta);
+                        console.log(respuesta);
                         if( respuesta.error === 'null' ){
                             alert(respuesta.exito);
                             muestra_clientes();
@@ -203,6 +212,42 @@ $(document).ready( () => {
                 //         console.error(err);
                 //     }
                 // )
+            })
+
+            document.addEventListener('click', (e)=>{
+                if(e.target.matches('.desbloquear')){
+                    let element = e.target.parentElement.parentElement.parentElement.parentElement;
+                    let cliente = element.getAttribute('cliente');
+                    let sucursal = document.getElementById('sucursal').value;
+                    let desbloquear = {cliente: cliente, suc: sucursal};
+                    console.log(desbloquear);
+                    fetch('Backend/desbloquear.php', {method: "POST", 
+                        headers:{'Content-Type': 'application/json'},
+                        body: JSON.stringify(desbloquear)
+                    })
+                    .then(
+                        res =>{
+                            return res.json();
+                        }
+                    )
+                    .then(
+                        data =>{
+                            let respuesta = JSON.parse(data);
+                            console.log(respuesta);
+                            if( respuesta.error === 'null' ){
+                                alert(respuesta.exito);
+                                muestra_clientes();
+                            } 
+                            else
+                                alert("NO se pudo completar la operacion: "+respuesta.error);
+                            }
+                    )
+                    .catch(
+                            err =>{
+                                console.error(err);
+                            }
+                    )
+                }
             })
         }
     }

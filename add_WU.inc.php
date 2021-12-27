@@ -9,8 +9,7 @@
                                 <div class="form-group">
                                     Sucursal:
                                     <select required id="sucursal" class='form-control'>
-                                        <option value="">Seleciona</option>
-                                        <option value="1">Matriz</option>
+                                        <option value="1" selected>Matriz</option>
                                         <option value="3">Suc Pedro Juan Caballero</option>
                                     </select>
                                 </div>

@@ -1,5 +1,5 @@
 <?php
     $titulo = "Clientes";
-    $pagina = "addcliente.inc.php";
+    $pagina = "clientesInt.inc.php";
     include 'Plantilla.php';
 ?>

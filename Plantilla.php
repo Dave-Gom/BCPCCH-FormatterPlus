@@ -29,9 +29,16 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">Formato BCP<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="ClientesWU.php">Clientes WU</a>
-                    </li>              
+                      
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Clientes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="ClientesWU.php">Clientes WU</a>
+                            <a class="dropdown-item" href="Clientes.php">Clientes Internos</a>
+                        </div>
+                    </li>           
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>

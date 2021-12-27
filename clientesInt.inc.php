@@ -9,7 +9,7 @@
                                 <div class="form-group">
                                     Sucursal: 
                                     <br>
-                                    <select required id="sucursal" class='form-control'>
+                                    <select required id="sucursal" class='form-control m-1'>
                                         <option value="1" selected>Matriz</option>
                                         <option value="3">Suc Pedro Juan Caballero</option>
                                     </select>
@@ -18,13 +18,13 @@
                                 <label for="cliente" class="p-2">
                                     Nro Cliente: 
                                     <br>
-                                    <input required type="text" class="form-control" placeholder="Numero de cliente" id="num_cliente" autocomplete="off">
+                                    <input required type="text" class="form-control m-1" placeholder="Numero de cliente" id="num_cliente" autocomplete="off">
                                 </label>
-                                <label for="docIdent" class="form-group p-2">
+                                <!-- <label for="docIdent" class="form-group p-2">
                                     Numero de Documento: 
                                     <br>
-                                    <input required type="text" class="form-control" placeholder="Documento de identidad" id="docIdent" autocomplete="off">
-                                </label>
+                                    <input required type="text" class="form-control p-1" placeholder="Documento de identidad" id="docIdent" autocomplete="off">
+                                </label> -->
                                 
                             </form>
                         </div>
@@ -43,7 +43,7 @@
                                         <th >CI</th>
                                         <th >Estatus</th>
                                         <th >User Block</th>
-                                        <th ></th>
+                                        <th >Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tabla_clientes">

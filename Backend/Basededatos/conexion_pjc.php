@@ -1,9 +1,6 @@
 <?php
     $conection = mysqli_connect(
-        'localhost',
-        'root',
-        '',
-        'chaco_pjc'
+        
     );
     if(!$conection)
         // echo "Basededatos Conectada!";
